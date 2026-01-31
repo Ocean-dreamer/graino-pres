@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import './App.css';
 
 // Components
-import Navbar from './components/Navigation/Navbar';
+// import Navbar from './components/Navigation/Navbar';
 import SideNav from './components/Navigation/SideNav';
 import ProgressBar from './components/Navigation/ProgressBar';
 
@@ -114,40 +114,7 @@ useEffect(() => {
   return () => clearInterval(interval);
 }, [currentSlide, isAutoPlaying, nextSlide]);
 
-  // Touch/Swipe support
-  useEffect(() => {
-    if (!presentationConfig.features.enableSwipe) return;
-
-    let touchStartY = 0;
-    let touchEndY = 0;
-
-    const handleTouchStart = (e) => {
-      touchStartY = e.touches[0].clientY;
-    };
-
-    const handleTouchEnd = (e) => {
-      touchEndY = e.changedTouches[0].clientY;
-      const diff = touchStartY - touchEndY;
-
-      if (Math.abs(diff) > 50) {
-        if (diff > 0) {
-          nextSlide();
-        } else {
-          prevSlide();
-        }
-      }
-    };
-
-    window.addEventListener('touchstart', handleTouchStart);
-    window.addEventListener('touchend', handleTouchEnd);
-
-    return () => {
-      window.removeEventListener('touchstart', handleTouchStart);
-      window.removeEventListener('touchend', handleTouchEnd);
-    };
-  }, [currentSlide]);
-
-
+  // Touch/Swipe support (duplicate removed - keeping the cleaner version below)
   // swipe support 
   useEffect(() => {
   if (!presentationConfig.features.enableSwipe) return;
